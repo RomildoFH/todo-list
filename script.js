@@ -21,8 +21,7 @@ criarTarefa ()
 //Destacando atividade selecionada com background cinza
 
 function toTarefaSelecionada () {
-    let tarefa = document.getElementsByClassName('tarefa');
-    
+        
     listaTarefas.addEventListener('click', function (event) {       
         let tarefaSelecionadaAnterior = document.getElementsByClassName('selecionada')
         for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
@@ -34,7 +33,10 @@ function toTarefaSelecionada () {
             tarefaSelecionada.className = 'tarefa selecionada';        
             // tarefaSelecionada.style.backgroundColor = 'gray';  
         } else if (tarefaSelecionada === 'tarefa selecionada') {
-            tarefaSelecionada.className = 'tarefa'
+            for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
+            tarefaSelecionadaAnterior[index].className = 'tarefa';              
+            // tarefa[index].style.backgroundColor = 'white';        
+            }
         }
     });
 }
@@ -56,4 +58,19 @@ function tarefaConcluida () {
     });
 }
 tarefaConcluida ()
+
+//Inserindo botão para limpar a lista
+//Botão inserido no HTML
+
+function limparLista () {
+    let btnApagaTudo = document.getElementById('apaga-tudo');
+
+    btnApagaTudo.addEventListener('click', function () {
+        //Código refatorado a partir do conteúdo deste link: https://www.w3schools.com/jsref/met_node_removechild.asp
+        while (listaTarefas.hasChildNodes()) {
+            listaTarefas.removeChild(listaTarefas.firstChild);
+          }
+    });
+}
+limparLista ();
 
