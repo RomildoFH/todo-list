@@ -74,3 +74,21 @@ function limparLista () {
 }
 limparLista ();
 
+
+
+function limparConcluidas () {
+    let apagaComplited = document.querySelector('#remover-finalizados');
+    apagaComplited.addEventListener('click', function () {
+    let completeds = document.querySelectorAll('.completed');
+    for (index = 0; index < completeds.length; index ++) {
+        listaTarefas.removeChild(completeds[index]);
+    }   
+});
+}
+limparConcluidas ();
+
+// Inserindo botão para limpar tarefas concluídas
+// Botão inserido no HTML
+// let listaConcluidas = document.getElementsByClassName('completed')
+
+
