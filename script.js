@@ -91,35 +91,44 @@ limparConcluidas ();
 //Inserindo botão para salvar lista
 //Botão inserido no HTML
 let arrayTarefas = [];
+let arrayClasses = [];
 let tarefasArmazenadasString;
 let arrayTarefasArmazenadas;
+let arrayClassesArmazenadas;
 function salvaLista () {
     const btnSalvarLista = document.querySelector('#salvar-tarefas');
     btnSalvarLista.addEventListener('click', function () {
         arrayTarefas = [];
+        arrayClasses = [];
         let listaSalva = document.querySelectorAll('.tarefa');
         for (index = 0; index < listaSalva.length; index ++) {
             arrayTarefas.push(listaSalva[index].innerHTML);
         }
-        localStorage.removeItem('tarefas')
+        for (index = 0; index < listaSalva.length; index ++) {
+            arrayClasses.push(listaSalva[index].classList.value);
+        }
+        localStorage.removeItem('tarefas');
+        localStorage.removeItem('classes', arrayClasses);
         localStorage.setItem('tarefas', arrayTarefas);
-        // tarefasArmazenadasString = localStorage.getItem('tarefas');
-        // arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
+        localStorage.setItem('classes', arrayClasses);
     });
 }
-salvaLista ()
+salvaLista ();
 
-function recuperarLista () {
-    tarefasArmazenadasString = localStorage.getItem('tarefas');
+tarefasArmazenadasString = localStorage.getItem('tarefas');
+classesArmazenadasString = localStorage.getItem('classes');
+if (tarefasArmazenadasString !== null) {
     arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
-    for (let index = 0; index < arrayTarefasArmazenadas; index ++) {
-        let tarefa = document.createElement('li');
-        tarefa.innerHTML = arrayTarefasArmazenadas[index];
-        tarefa.className = 'tarefa';
-        listaTarefas.appendChild(tarefa);
+    arrayClassesArmazenadas = classesArmazenadasString.split(',');
+    function recuperarLista () {
+        // tarefasArmazenadasString = localStorage.getItem('tarefas');
+        // arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
+        for (let index = 0; index < arrayTarefasArmazenadas.length; index ++) {
+            let tarefa = document.createElement('li');
+            tarefa.innerHTML = arrayTarefasArmazenadas[index];
+            tarefa.className = arrayClassesArmazenadas[index];
+            listaTarefas.appendChild(tarefa);
+        }
     }
+    recuperarLista ();
 }
-// window.onload = function () {
-//     recuperarLista ()
-// }
-
