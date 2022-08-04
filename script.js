@@ -132,3 +132,17 @@ if (tarefasArmazenadasString !== null) {
     }
     recuperarLista ();
 }
+
+//Inserindo botão para apagar selecionada
+//Botão inserido no HTML
+function limparSelecionada () {
+    let apagaSelecionada = document.querySelector('#remover-selecionado');
+    apagaSelecionada.addEventListener('click', function () {
+    let selecionadas = document.querySelectorAll('.selecionada');
+    // console.log(completeds)
+    for (index = 0; index < selecionadas.length; index ++) {
+        listaTarefas.removeChild(selecionadas[index]);
+    }   
+});
+}
+limparSelecionada ();
