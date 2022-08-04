@@ -74,12 +74,13 @@ function limparLista () {
 }
 limparLista ();
 
-
-
+//Inserindo botão para limpar concluídas
+//Botão inserido no HTML
 function limparConcluidas () {
     let apagaComplited = document.querySelector('#remover-finalizados');
     apagaComplited.addEventListener('click', function () {
     let completeds = document.querySelectorAll('.completed');
+    // console.log(completeds)
     for (index = 0; index < completeds.length; index ++) {
         listaTarefas.removeChild(completeds[index]);
     }   
@@ -87,8 +88,38 @@ function limparConcluidas () {
 }
 limparConcluidas ();
 
-// Inserindo botão para limpar tarefas concluídas
-// Botão inserido no HTML
-// let listaConcluidas = document.getElementsByClassName('completed')
+//Inserindo botão para salvar lista
+//Botão inserido no HTML
+let arrayTarefas = [];
+let tarefasArmazenadasString;
+let arrayTarefasArmazenadas;
+function salvaLista () {
+    const btnSalvarLista = document.querySelector('#salvar-tarefas');
+    btnSalvarLista.addEventListener('click', function () {
+        arrayTarefas = [];
+        let listaSalva = document.querySelectorAll('.tarefa');
+        for (index = 0; index < listaSalva.length; index ++) {
+            arrayTarefas.push(listaSalva[index].innerHTML);
+        }
+        localStorage.removeItem('tarefas')
+        localStorage.setItem('tarefas', arrayTarefas);
+        // tarefasArmazenadasString = localStorage.getItem('tarefas');
+        // arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
+    });
+}
+salvaLista ()
 
+function recuperarLista () {
+    tarefasArmazenadasString = localStorage.getItem('tarefas');
+    arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
+    for (let index = 0; index < arrayTarefasArmazenadas; index ++) {
+        let tarefa = document.createElement('li');
+        tarefa.innerHTML = arrayTarefasArmazenadas[index];
+        tarefa.className = 'tarefa';
+        listaTarefas.appendChild(tarefa);
+    }
+}
+// window.onload = function () {
+//     recuperarLista ()
+// }
 
