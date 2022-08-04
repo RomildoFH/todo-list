@@ -20,17 +20,40 @@ criarTarefa ()
 
 //Destacando atividade selecionada com background cinza
 
-function classeTarefaSelecionada () {
+function toTarefaSelecionada () {
     let tarefa = document.getElementsByClassName('tarefa');
-    listaTarefas.addEventListener('click', function (event) {        
-        for (index = 0; index < tarefa.length; index ++) {
-            tarefa[index].className = 'tarefa';  
-            tarefa[index].style.backgroundColor = 'white';        
+    
+    listaTarefas.addEventListener('click', function (event) {       
+        let tarefaSelecionadaAnterior = document.getElementsByClassName('selecionada')
+        for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
+            tarefaSelecionadaAnterior[index].className = 'tarefa';              
+            // tarefa[index].style.backgroundColor = 'white';        
         }        
         let tarefaSelecionada = event.target
-        tarefaSelecionada.className = 'tarefa selecionada';
-        tarefaSelecionada.style.backgroundColor = 'gray';        
+        if (tarefaSelecionada.className === 'tarefa') {
+            tarefaSelecionada.className = 'tarefa selecionada';        
+            // tarefaSelecionada.style.backgroundColor = 'gray';  
+        } else if (tarefaSelecionada === 'tarefa selecionada') {
+            tarefaSelecionada.className = 'tarefa'
+        }
     });
 }
-classeTarefaSelecionada ();
+toTarefaSelecionada ()
+
+//Marcando atividades concluídas
+
+function tarefaConcluida () {
+    
+    listaTarefas.addEventListener('dblclick', function (event) {
+        let tarefaConcluida = event.target;
+        if (tarefaConcluida.className !== 'tarefa completed') {
+            tarefaConcluida.className = 'tarefa completed';
+            // tarefaConcluida.style.textDecoration = 'line-through solid black';
+        } else if (tarefaConcluida.className === 'tarefa completed') {
+            tarefaConcluida.className = 'tarefa';
+            // tarefaConcluida.style.textDecoration = 'none';
+        }       
+    });
+}
+tarefaConcluida ()
 

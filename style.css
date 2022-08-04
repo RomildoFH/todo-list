@@ -1,0 +1,13 @@
+.tarefa {
+    background-color: white;
+    text-decoration: none;
+}
+
+.selecionada {
+    background-color: gray;
+    text-decoration: none;
+}
+
+.completed {
+    text-decoration: line-through solid black;
+}
