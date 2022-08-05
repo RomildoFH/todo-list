@@ -146,3 +146,48 @@ function limparSelecionada () {
 });
 }
 limparSelecionada ();
+
+//Inserindo botões para mover-cima e mover-baixo
+//Botão inserido no HTML
+
+function moverCima () {
+    let btnMoverCima = document.getElementById('mover-cima');
+    btnMoverCima.addEventListener('click', function () {
+        let listaDeTarefas = document.querySelector('#lista-tarefas');
+        let primeiroElemento = document.querySelector('li');
+        let tarefaSelecionada = document.querySelector('.selecionada');
+        // console.log(listaDeTarefas)
+        // console.log(primeiroElemento)
+        // console.log(tarefaSelecionada)
+        // console.log(tarefaSelecionada.length)
+        
+        if (tarefaSelecionada.length !== null) {
+            let elementoAnterior = tarefaSelecionada.previousSibling;
+            if (tarefaSelecionada !== primeiroElemento) {
+                listaDeTarefas.insertBefore(tarefaSelecionada, elementoAnterior);
+            }
+        }
+    })
+}
+moverCima ()
+
+function moverBaixo () {
+    let btnMoverBaixo = document.getElementById('mover-baixo');
+    btnMoverBaixo.addEventListener('click', function () {
+        let listaDeTarefas = document.querySelector('#lista-tarefas');
+        let ultimoElemento = listaDeTarefas.lastElementChild;
+        let tarefaSelecionada = document.querySelector('.selecionada');
+        // console.log(listaDeTarefas)
+        // console.log(ultimoElemento)
+        // console.log(tarefaSelecionada)
+        // console.log(tarefaSelecionada.length)
+        
+        if (tarefaSelecionada.length !== null) {
+            let elementoProximo = tarefaSelecionada.nextSibling;
+            if (tarefaSelecionada !== ultimoElemento) {
+                listaDeTarefas.insertBefore(elementoProximo, tarefaSelecionada);
+            }
+        }
+    })
+}
+moverBaixo ()
