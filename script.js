@@ -114,9 +114,10 @@ let arrayClasses = [];
 let tarefasArmazenadasString;
 let arrayTarefasArmazenadas;
 let arrayClassesArmazenadas;
+const btnSalvarLista = document.querySelector('#salvar-tarefas');
+
 function salvaLista () {
-    const btnSalvarLista = document.querySelector('#salvar-tarefas');
-    btnSalvarLista.addEventListener('click', function clickSalvar () {
+    
         arrayTarefas = [];
         arrayClasses = [];
         let listaSalva = document.querySelectorAll('.tarefa');
@@ -130,9 +131,23 @@ function salvaLista () {
         localStorage.removeItem('classes', arrayClasses);
         localStorage.setItem('tarefas', arrayTarefas);
         localStorage.setItem('classes', arrayClasses);
-    });
-}
-salvaLista ();
+    
+        arrayTarefas = [];
+        arrayClasses = [];
+        listaSalva = document.querySelectorAll('.tarefa');
+        for (index = 0; index < listaSalva.length; index ++) {
+            arrayTarefas.push(listaSalva[index].innerHTML);
+        }
+        for (index = 0; index < listaSalva.length; index ++) {
+            arrayClasses.push(listaSalva[index].classList.value);
+        }
+        localStorage.removeItem('tarefas');
+        localStorage.removeItem('classes', arrayClasses);
+        localStorage.setItem('tarefas', arrayTarefas);
+        localStorage.setItem('classes', arrayClasses);
+    }
+    
+btnSalvarLista.addEventListener('click', salvaLista);
 
 tarefasArmazenadasString = localStorage.getItem('tarefas');
 classesArmazenadasString = localStorage.getItem('classes');
@@ -187,7 +202,7 @@ function moverCima () {
                 listaDeTarefas.insertBefore(tarefaSelecionada, elementoAnterior);
             }        
         }
-        clickSalvar ();
+        salvaLista ();
     })
 }
 moverCima ()
@@ -210,7 +225,7 @@ function moverBaixo () {
                 listaDeTarefas.insertBefore(elementoProximo, tarefaSelecionada);
             }            
         }
-        clickSalvar ();
+        salvaLista ();
     })
 }
 moverBaixo ()
