@@ -3,26 +3,6 @@ const listaTarefas = document.getElementById('lista-tarefas');
 const inputCamp = document.getElementById('texto-tarefa');
 const btnAdicionarTarefa = document.getElementById('criar-tarefa');
 
-// let numClicks = 0;
-// const handleClick = () => {
-//   numClicks++;
-//   if (numClicks === 1) {
-//     singleClickTimer = setTimeout(() => {
-//       numClicks = 0;
-//       console.log("single click!");
-//     }, 400);
-//   } else if (numClicks === 2) {
-//     clearTimeout(singleClickTimer);
-//     numClicks = 0;
-//     console.log("double click!");
-//   }
-// };
-// document.addEventListener("click", handleClick);
-
-
-
-
-
 //Adicionando tarefas na lista
 
 function criarTarefa () {
@@ -38,8 +18,8 @@ function criarTarefa () {
 }
 criarTarefa ()
 
-function tarefaConcluida () {
-    
+//Marcando atividades concluídas
+function tarefaConcluida () {    
     listaTarefas.addEventListener('dblclick', function (event) {
         let tarefaConcluida = event.target;
         if (tarefaConcluida.classList.contains('completed')) {
@@ -52,9 +32,7 @@ function tarefaConcluida () {
 tarefaConcluida ()
 
 //Destacando atividade selecionada com background cinza
-
-function toTarefaSelecionada () {
-        
+function toTarefaSelecionada () {        
     listaTarefas.addEventListener('click', function (event) {       
         let tarefaSelecionadaAnterior = document.getElementsByClassName('selecionada')
         for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
@@ -64,26 +42,22 @@ function toTarefaSelecionada () {
             }
         }        
         let tarefaSelecionada = event.target
-        let listaDeClasse = tarefaSelecionada.classList
-        if (listaDeClasse.contains('selecionada')){
-            tarefaSelecionada.classList.remove('selecionada');
-        } else {
-            tarefaSelecionada.classList.add('selecionada');  
-        }      
+        //As linhas comentadas removem a classe selecionada ao clicar novamente, para ativar, descomente da 46 a 51 e comente a 52.
+        // let listaDeClasse = tarefaSelecionada.classList
+        // if (listaDeClasse.contains('selecionada')){
+        //     tarefaSelecionada.classList.remove('selecionada');
+        // } else {
+        //     tarefaSelecionada.classList.add('selecionada');  
+        // }     
+        tarefaSelecionada.classList.add('selecionada'); 
     });
 }
 toTarefaSelecionada ()
 
-//Marcando atividades concluídas
-
-
-
 //Inserindo botão para limpar a lista
 //Botão inserido no HTML
-
 function limparLista () {
     let btnApagaTudo = document.getElementById('apaga-tudo');
-
     btnApagaTudo.addEventListener('click', function () {
         //Código refatorado a partir do conteúdo deste link: https://www.w3schools.com/jsref/met_node_removechild.asp
         while (listaTarefas.hasChildNodes()) {
@@ -115,48 +89,43 @@ let tarefasArmazenadasString;
 let arrayTarefasArmazenadas;
 let arrayClassesArmazenadas;
 const btnSalvarLista = document.querySelector('#salvar-tarefas');
-
-function salvaLista () {
-    
-        arrayTarefas = [];
-        arrayClasses = [];
-        let listaSalva = document.querySelectorAll('.tarefa');
-        for (index = 0; index < listaSalva.length; index ++) {
+function salvaLista () {    
+    arrayTarefas = [];
+    arrayClasses = [];
+    let listaSalva = document.querySelectorAll('.tarefa');
+    for (index = 0; index < listaSalva.length; index ++) {
             arrayTarefas.push(listaSalva[index].innerHTML);
-        }
-        for (index = 0; index < listaSalva.length; index ++) {
-            arrayClasses.push(listaSalva[index].classList.value);
-        }
-        localStorage.removeItem('tarefas');
-        localStorage.removeItem('classes', arrayClasses);
-        localStorage.setItem('tarefas', arrayTarefas);
-        localStorage.setItem('classes', arrayClasses);
-    
-        arrayTarefas = [];
-        arrayClasses = [];
-        listaSalva = document.querySelectorAll('.tarefa');
-        for (index = 0; index < listaSalva.length; index ++) {
-            arrayTarefas.push(listaSalva[index].innerHTML);
-        }
-        for (index = 0; index < listaSalva.length; index ++) {
-            arrayClasses.push(listaSalva[index].classList.value);
-        }
-        localStorage.removeItem('tarefas');
-        localStorage.removeItem('classes', arrayClasses);
-        localStorage.setItem('tarefas', arrayTarefas);
-        localStorage.setItem('classes', arrayClasses);
     }
-    
+    for (index = 0; index < listaSalva.length; index ++) {
+        arrayClasses.push(listaSalva[index].classList.value);
+    }
+    localStorage.removeItem('tarefas');
+    localStorage.removeItem('classes', arrayClasses);
+    localStorage.setItem('tarefas', arrayTarefas);
+    localStorage.setItem('classes', arrayClasses);    
+    arrayTarefas = [];
+    arrayClasses = [];
+    listaSalva = document.querySelectorAll('.tarefa');
+    for (index = 0; index < listaSalva.length; index ++) {
+        arrayTarefas.push(listaSalva[index].innerHTML);
+    }
+    for (index = 0; index < listaSalva.length; index ++) {
+        arrayClasses.push(listaSalva[index].classList.value);
+    }
+    localStorage.removeItem('tarefas');
+    localStorage.removeItem('classes', arrayClasses);
+    localStorage.setItem('tarefas', arrayTarefas);
+    localStorage.setItem('classes', arrayClasses);
+}    
 btnSalvarLista.addEventListener('click', salvaLista);
 
+//Recuperando lista salva ao recarregar a página
 tarefasArmazenadasString = localStorage.getItem('tarefas');
 classesArmazenadasString = localStorage.getItem('classes');
 if (tarefasArmazenadasString !== null) {
     arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
     arrayClassesArmazenadas = classesArmazenadasString.split(',');
-    function recuperarLista () {
-        // tarefasArmazenadasString = localStorage.getItem('tarefas');
-        // arrayTarefasArmazenadas = tarefasArmazenadasString.split(',');
+    function recuperarLista () {        
         for (let index = 0; index < arrayTarefasArmazenadas.length; index ++) {
             let tarefa = document.createElement('li');
             tarefa.innerHTML = arrayTarefasArmazenadas[index];
@@ -183,7 +152,6 @@ limparSelecionada ();
 
 //Inserindo botões para mover-cima e mover-baixo
 //Botão inserido no HTML
-
 function moverCima () {
     let btnMoverCima = document.getElementById('mover-cima');
     btnMoverCima.addEventListener('click', function () {
@@ -193,8 +161,7 @@ function moverCima () {
         // console.log(listaDeTarefas)
         // console.log(primeiroElemento)
         // console.log(tarefaSelecionada)
-        // console.log(tarefaSelecionada.length)
-        
+        // console.log(tarefaSelecionada.length)        
         if (tarefaSelecionada !== null) {
             // console.log(tarefaSelecionada)
             let elementoAnterior = tarefaSelecionada.previousSibling;
@@ -202,7 +169,7 @@ function moverCima () {
                 listaDeTarefas.insertBefore(tarefaSelecionada, elementoAnterior);
             }        
         }
-        salvaLista ();
+        // salvaLista ();
     })
 }
 moverCima ()
@@ -216,8 +183,7 @@ function moverBaixo () {
         // console.log(listaDeTarefas)
         // console.log(ultimoElemento)
         // console.log(tarefaSelecionada)
-        // console.log(tarefaSelecionada.length)
-        
+        // console.log(tarefaSelecionada.length)        
         if (tarefaSelecionada !== null) {
             // console.log(tarefaSelecionada)
             let elementoProximo = tarefaSelecionada.nextSibling;
@@ -225,7 +191,14 @@ function moverBaixo () {
                 listaDeTarefas.insertBefore(elementoProximo, tarefaSelecionada);
             }            
         }
-        salvaLista ();
+        // salvaLista ();
     })
 }
 moverBaixo ()
+
+window.onload = function () {
+    let selecionada = document.getElementsByClassName('selecionada')
+    for (let index = 0; selecionada.length; index ++) {
+        selecionada[index].classList.remove('selecionada');
+    }
+}
