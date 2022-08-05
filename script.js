@@ -3,6 +3,26 @@ const listaTarefas = document.getElementById('lista-tarefas');
 const inputCamp = document.getElementById('texto-tarefa');
 const btnAdicionarTarefa = document.getElementById('criar-tarefa');
 
+// let numClicks = 0;
+// const handleClick = () => {
+//   numClicks++;
+//   if (numClicks === 1) {
+//     singleClickTimer = setTimeout(() => {
+//       numClicks = 0;
+//       console.log("single click!");
+//     }, 400);
+//   } else if (numClicks === 2) {
+//     clearTimeout(singleClickTimer);
+//     numClicks = 0;
+//     console.log("double click!");
+//   }
+// };
+// document.addEventListener("click", handleClick);
+
+
+
+
+
 //Adicionando tarefas na lista
 
 function criarTarefa () {
@@ -18,6 +38,19 @@ function criarTarefa () {
 }
 criarTarefa ()
 
+function tarefaConcluida () {
+    
+    listaTarefas.addEventListener('dblclick', function (event) {
+        let tarefaConcluida = event.target;
+        if (tarefaConcluida.classList.contains('completed')) {
+            tarefaConcluida.classList.remove('completed');
+        } else {
+            tarefaConcluida.classList.add('completed');
+        }
+    });
+}
+tarefaConcluida ()
+
 //Destacando atividade selecionada com background cinza
 
 function toTarefaSelecionada () {
@@ -25,39 +58,25 @@ function toTarefaSelecionada () {
     listaTarefas.addEventListener('click', function (event) {       
         let tarefaSelecionadaAnterior = document.getElementsByClassName('selecionada')
         for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
-            tarefaSelecionadaAnterior[index].className = 'tarefa';              
-            // tarefa[index].style.backgroundColor = 'white';        
+            if(tarefaSelecionadaAnterior[index] !== event.target) {
+                tarefaSelecionadaAnterior[index].classList.remove('selecionada');              
+                // tarefa[index].style.backgroundColor = 'white';        
+            }
         }        
         let tarefaSelecionada = event.target
-        if (tarefaSelecionada.className === 'tarefa') {
-            tarefaSelecionada.className = 'tarefa selecionada';        
-            // tarefaSelecionada.style.backgroundColor = 'gray';  
-        } else if (tarefaSelecionada === 'tarefa selecionada') {
-            for (index = 0; index < tarefaSelecionadaAnterior.length; index ++) {
-            tarefaSelecionadaAnterior[index].className = 'tarefa';              
-            // tarefa[index].style.backgroundColor = 'white';        
-            }
-        }
+        let listaDeClasse = tarefaSelecionada.classList
+        if (listaDeClasse.contains('selecionada')){
+            tarefaSelecionada.classList.remove('selecionada');
+        } else {
+            tarefaSelecionada.classList.add('selecionada');  
+        }      
     });
 }
 toTarefaSelecionada ()
 
 //Marcando atividades concluídas
 
-function tarefaConcluida () {
-    
-    listaTarefas.addEventListener('dblclick', function (event) {
-        let tarefaConcluida = event.target;
-        if (tarefaConcluida.className !== 'tarefa completed') {
-            tarefaConcluida.className = 'tarefa completed';
-            // tarefaConcluida.style.textDecoration = 'line-through solid black';
-        } else if (tarefaConcluida.className === 'tarefa completed') {
-            tarefaConcluida.className = 'tarefa';
-            // tarefaConcluida.style.textDecoration = 'none';
-        }       
-    });
-}
-tarefaConcluida ()
+
 
 //Inserindo botão para limpar a lista
 //Botão inserido no HTML
@@ -97,7 +116,7 @@ let arrayTarefasArmazenadas;
 let arrayClassesArmazenadas;
 function salvaLista () {
     const btnSalvarLista = document.querySelector('#salvar-tarefas');
-    btnSalvarLista.addEventListener('click', function () {
+    btnSalvarLista.addEventListener('click', function clickSalvar () {
         arrayTarefas = [];
         arrayClasses = [];
         let listaSalva = document.querySelectorAll('.tarefa');
@@ -161,12 +180,14 @@ function moverCima () {
         // console.log(tarefaSelecionada)
         // console.log(tarefaSelecionada.length)
         
-        if (tarefaSelecionada.length !== null) {
+        if (tarefaSelecionada !== null) {
+            // console.log(tarefaSelecionada)
             let elementoAnterior = tarefaSelecionada.previousSibling;
             if (tarefaSelecionada !== primeiroElemento) {
                 listaDeTarefas.insertBefore(tarefaSelecionada, elementoAnterior);
-            }
+            }        
         }
+        clickSalvar ();
     })
 }
 moverCima ()
@@ -182,12 +203,14 @@ function moverBaixo () {
         // console.log(tarefaSelecionada)
         // console.log(tarefaSelecionada.length)
         
-        if (tarefaSelecionada.length !== null) {
+        if (tarefaSelecionada !== null) {
+            // console.log(tarefaSelecionada)
             let elementoProximo = tarefaSelecionada.nextSibling;
             if (tarefaSelecionada !== ultimoElemento) {
                 listaDeTarefas.insertBefore(elementoProximo, tarefaSelecionada);
-            }
+            }            
         }
+        clickSalvar ();
     })
 }
 moverBaixo ()
