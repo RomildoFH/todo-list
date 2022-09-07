@@ -1,5 +1,42 @@
+* {
+    margin: 0px;
+    color: white;
+}
+
+body {
+    background-color: rgb(15, 59, 15);
+    background-image: url('https://cdn.pixabay.com/photo/2019/05/31/09/15/business-4241785_960_720.jpg');
+    background-size: cover;
+}
+
+header {
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+header h1 {
+    font-size: 80px;
+}
+
+#section-controls {
+    display: flex;
+    justify-content: space-around;
+    position:fixed;
+    top: 88%;
+    width: 100%;
+}
+
+#tasks-section {
+    display: flex;
+    justify-content: center;
+}
+
 #div-tarefas {
+    display: flex;
+    justify-content: center;
     min-height: 100px;
+    max-width: 80%;
 }
 
 .tarefa {
@@ -9,13 +46,82 @@
 
 .selecionada {
     background-color: gray;
+    opacity: 0.6;
     text-decoration: none;
 }
 
 .completed {
-    text-decoration: line-through solid black;
+    text-decoration: line-through solid rgb(243, 3, 3);
 }
 
 #controles {
-    margin-top: 50px;
+    display: flex;
+    width: 50%;
+    justify-content: space-around;
+    margin: 5px 200px;
+}
+
+.btn-control {
+    color: black;
+}
+
+/* #forms-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 100%;
+} */
+
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    flex-wrap: wrap;
+
+    max-width: 100%;
+}
+
+.mb-3 {
+    display: flex;
+    justify-content:end;
+    flex-direction:column;
+    align-content:flex-end;
+    margin-left: 3px;
+    margin-bottom: 0px;
+    width: 250px;
+}
+
+.form-control {
+    max-width: 100%;
+}
+
+label {
+    margin: 0px;
+}
+
+#criar-tarefa {
+    width: 250px;
+    height: 38px;
+}
+
+footer {
+    position: fixed;
+    top: 95%;
+    width: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.781);
+}
+
+table {
+    text-align: center;
+    text-shadow: 1px 1px 1px black;
+}
+
+table th {
+    color: rgb(219, 223, 18);
+    text-shadow: 1px 1px 1px black;
+    text-transform: uppercase;
+    font-weight: bolder;
+    min-width: 100px;
+    /* max-width: 150px; */
 }

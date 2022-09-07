@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>To do List</title>
 </head>
@@ -12,31 +14,77 @@
         <h1>Minha Lista de Tarefas</h1>
     </header>
     <main>
-        <section id="instructions">
+        <!-- <section id="instructions">
             <p id="funcionamento">Clique duas vezes em um item para marcá-lo como completo</p>
+        </section> -->
+        <section id="section-controls">
+            <div id="controles">
+                <button id="apaga-tudo" class="btn btn-dark">Limpar Lista</button>
+                <button id="remover-finalizados" class="btn btn-dark">Remover concluídas</button>
+                <button id="remover-selecionado" class="btn btn-dark">X</button>
+                <button id="mover-cima" class="btn btn-dark">⇧</button>
+                <button id="mover-baixo" class="btn btn-dark">⇩</button>
+                <button id="salvar-tarefas" class="btn btn-dark">Salvar lista</button>
+            </div>
         </section>
         <section id="input-section">
-            <div>
-                <input id="texto-tarefa" type="text" placeholder="Insira uma tarefa">
-                <button id="criar-tarefa">Adicionar Tarefa</button>
+            <div id="forms-container">
+                <form action="">
+                    <div class="mb-3">
+                        <label for="what-input" class="form-label">O que será feito?</label>
+                        <input id="what-input" type="text" placeholder="What?" name="tarefa" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="how-input">Como será feito?</label>
+                        <input type="text" name="responsavel" id="how-input" placeholder="How?" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="why-input">Por que será feito?</label>
+                        <input type="text" name="responsavel" id="why-input" placeholder="Why?" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="where-input">Onde será feito?</label>
+                        <input type="text" name="responsavel" id="where-input" placeholder="Where?" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="who-input">Por quem será feito?</label>
+                        <input type="text" name="responsavel" id="who-input" placeholder="Who?" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="when-input">Quando será feito?</label>
+                        <input type="date" name="data" id="when-input" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label for="how-much-input">Quanto custará?</label>
+                        <input type="text" name="responsavel" id="how-much-input" placeholder="How Much?" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <button type="button" id="criar-tarefa" class="btn btn-primary" >Adicionar Tarefa</button>
+                    </div>
+                    <div class="mb-3"></div>
+                </form>
             </div>
-        </section>
+        </section>        
         <section id="tasks-section">
-            <div id="div-tarefas">
-                <ol id="lista-tarefas"></ol>
+            <div id="div-tarefas">               
+                <table id="tabela-tarefas">
+                    <tr>
+                        <th>Oque</th>
+                        <th>Como</th>
+                        <th>Porque</th>
+                        <th>Onde</th>
+                        <th>Responsável</th>
+                        <th>Quando</th>
+                        <th>Quanto</th>
+                    </tr>                   
+                </table>
             </div>
         </section>
+        <footer>
+            <p>Todos os direitos reservados: Romildo Silva</p>
+        </footer>
     </main>
-    <section>
-        <div id="controles">
-            <button id="apaga-tudo">Limpar Lista</button>
-            <button id="remover-finalizados">Remover concluídas</button>
-            <button id="remover-selecionado">X</button>
-            <button id="mover-cima">⇧</button>
-            <button id="mover-baixo">⇩</button>
-            <button id="salvar-tarefas">Salvar lista</button>
-        </div>
-    </section>
-    <script src="./script.js"></script>
+    
+    <script src="./script2.js"></script>
 </body>
 </html>
