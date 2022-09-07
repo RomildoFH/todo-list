@@ -10,7 +10,10 @@ const listaTarefas = document.getElementById('lista-tarefas');
 const btnSalvar = document.getElementById('salvar-tarefas');
 const tabelaTarefas = document.getElementById('tabela-tarefas');
 const btnRemover = document.getElementById('remover-selecionado');
+const btnRemoveAll = document.getElementById('apaga-tudo');
+const btnRemoveCompleted = document.getElementById('remover-finalizados');
 
+const data = new Date();
 
 function adicionarTarefa() {
   let table = document.getElementById("tabela-tarefas");
@@ -23,9 +26,10 @@ function adicionarTarefa() {
   let cell5 = row.insertCell(4);
   let cell6 = row.insertCell(5);
   let cell7 = row.insertCell(6);
+  let cell8 = row.insertCell(7);
   cell1.innerHTML = whatInput.value;
   cell1.className = 'cells';
-  cell2.innerHTML = howInput.value; 
+  cell2.innerHTML = howInput.value;
   cell2.className = 'cells';
   cell3.innerHTML = whyInput.value;
   cell3.className = 'cells';
@@ -35,9 +39,12 @@ function adicionarTarefa() {
   cell5.className = 'cells';
   cell6.innerHTML = whenInput.value;
   cell6.className = 'cells';
-  cell7.innerHTML = muchInput.value;  
+  cell7.innerHTML = muchInput.value;
   cell7.className = 'cells';
+  cell8.innerHTML = 'Pendente';
+  cell8.className = 'cells';
   whatInput.value = '';
+  howInput.value = '';
   whyInput.value = '';
   whereInput.value = '';
   whoInput.value = '';
@@ -47,7 +54,6 @@ function adicionarTarefa() {
 
 btnAdicionar.addEventListener('click', () => {
   adicionarTarefa();
-
 });
 
 btnSalvar.addEventListener('click', () => {
@@ -59,8 +65,9 @@ btnSalvar.addEventListener('click', () => {
     for (let index2 = 0; index2 < filhos.length; index2 += 1) {
       tableCells.push(filhos[index2].innerHTML);
     }
+    tableCells.push(tableRows[index].classList)
     localStorage.setItem(`tableRow ${index}`, tableCells);
-    // console.log(tableRows)
+    console.log(tableRows)
   }
 });
 
@@ -71,7 +78,7 @@ const recuperaLista = () => {
     // console.log (rowData);
     let table = document.getElementById("tabela-tarefas");
     let row = table.insertRow(table.rows.length);
-    row.className = 'data-rows';    
+    row.classList = rowData[rowData.length - 1];
     let cell1 = row.insertCell(0);
     let cell2 = row.insertCell(1);
     let cell3 = row.insertCell(2);
@@ -79,9 +86,10 @@ const recuperaLista = () => {
     let cell5 = row.insertCell(4);
     let cell6 = row.insertCell(5);
     let cell7 = row.insertCell(6);
+    let cell8 = row.insertCell(7);
     cell1.innerHTML = rowData[0];
     cell1.className = 'cells';
-    cell2.innerHTML = rowData[1]; 
+    cell2.innerHTML = rowData[1];
     cell2.className = 'cells';
     cell3.innerHTML = rowData[2];
     cell3.className = 'cells';
@@ -91,8 +99,10 @@ const recuperaLista = () => {
     cell5.className = 'cells';
     cell6.innerHTML = rowData[5];
     cell6.className = 'cells';
-    cell7.innerHTML = rowData[6];  
+    cell7.innerHTML = rowData[6];
     cell7.className = 'cells';
+    cell8.innerHTML = rowData[7];
+    cell8.className = 'cells';
   })
   // console.log(arrayInfo);
 }
@@ -106,12 +116,12 @@ tabelaTarefas.addEventListener('click', function (event) {
   let rowSelected = event.target.parentElement;
   // console.log(allSelected);
   for (let index = 0; index < allSelected.length; index += 1) {
-    if(allSelected[index] !== rowSelected){
+    if (allSelected[index] !== rowSelected) {
       allSelected[index].classList.remove('selecionada');
     }
   }
   let listaClasses = rowSelected.classList;
-  if(listaClasses.contains('selecionada')) {
+  if (listaClasses.contains('selecionada')) {
     rowSelected.classList.remove('selecionada');
   } else {
     rowSelected.classList.add('selecionada');
@@ -123,10 +133,12 @@ tabelaTarefas.addEventListener('click', function (event) {
 tabelaTarefas.addEventListener('dblclick', (event) => {
   let tarefaConcluida = event.target.parentElement;
   let listaClasses = tarefaConcluida.classList;
-  if( listaClasses.contains('completed')) {
+  if (listaClasses.contains('completed')) {
     tarefaConcluida.classList.remove('completed');
+    tarefaConcluida.lastChild.innerHTML = 'Pendente';
   } else {
     tarefaConcluida.classList.add('completed');
+    tarefaConcluida.lastChild.innerHTML = 'Concluída';
   }
 })
 
@@ -134,15 +146,22 @@ tabelaTarefas.addEventListener('dblclick', (event) => {
 btnRemover.addEventListener('click', () => {
   let allSelected = document.getElementsByClassName('selecionada');
   let tableBody = document.querySelectorAll("tbody");
-  console.log(tableBody[0].children.length)
+  // console.log(tableBody[0].children.length)
   for (let index = 0; index < tableBody[0].children.length; index += 1) {
-    if(allSelected[0] === tableBody[0].children[index]) {
+    if (allSelected[0] === tableBody[0].children[index]) {
       tableBody[0].removeChild(tableBody[0].children[index]);
     }
   }
-  console.log(allSelected);
-  console.log(tableBody[0].children);
+  // console.log(allSelected);
+  // console.log(tableBody[0].children);
   // console.log(allSelected[0] === tableBody[0].children[3]);
 })
 
+// Botão limpar lista:
+btnRemoveAll.addEventListener('click', () => {
+  let tableBody = document.querySelectorAll("tbody");
+  while (tableBody[0].children.length > 1) {
+    tableBody[0].removeChild(tableBody[0].children[1]);
+  }
+})
 

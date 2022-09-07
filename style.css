@@ -50,9 +50,12 @@ header h1 {
     text-decoration: none;
 }
 
-.completed {
+/* .completed td {
     text-decoration: line-through solid rgb(243, 3, 3);
-}
+    color:rgb(26, 226, 26);
+    font-weight: 500;
+    text-shadow: 1px 1px 1px black;
+} */
 
 #controles {
     display: flex;
