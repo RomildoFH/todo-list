@@ -61,13 +61,13 @@ btnSalvar.addEventListener('click', () => {
   let tableRows = document.querySelectorAll('.data-rows');
   for (let index = 0; index < tableRows.length; index += 1) {
     const filhos = tableRows[index].children
-    let tableCells = []
+    let rowCells = []
     for (let index2 = 0; index2 < filhos.length; index2 += 1) {
-      tableCells.push(filhos[index2].innerHTML);
+      rowCells.push(filhos[index2].innerHTML);
     }
-    tableCells.push(tableRows[index].classList)
-    localStorage.setItem(`tableRow ${index}`, tableCells);
-    console.log(tableRows)
+    rowCells.push(tableRows[index].classList)
+    localStorage.setItem(`${index +1} tableRow`, rowCells);
+    // console.log(tableRows)
   }
 });
 
@@ -162,6 +162,21 @@ btnRemoveAll.addEventListener('click', () => {
   let tableBody = document.querySelectorAll("tbody");
   while (tableBody[0].children.length > 1) {
     tableBody[0].removeChild(tableBody[0].children[1]);
+  }
+})
+
+btnRemoveCompleted.addEventListener('click', () => {
+  let allCompleted = document.getElementsByClassName('completed');
+  let tableBody = document.querySelectorAll("tbody");
+  // console.log(tableBody[0])
+  // console.log(tableBody[0].children)
+  for (let cont = 0; cont < tableBody[0].children.length; cont += 1) {
+    for (let index = 0; index < tableBody[0].children.length; index += 1) {
+      // console.log(tableBody[0].children[index]);
+      if (tableBody[0].children[index].classList.contains('completed')) {
+        tableBody[0].removeChild(tableBody[0].children[index]);
+      }
+    }
   }
 })
 
