@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
     <title>To do List</title>
 </head>
+
 <body>
     <header>
         <h1>Minha Lista de Tarefas</h1>
+        <div id="calendario">
+            <div id="data-atual"></div>
+            <div id="digital-clock"></div>
+        </div>
     </header>
     <main>
         <!-- <section id="instructions">
@@ -44,7 +53,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="where-input">Onde será feito?</label>
-                        <input type="text" name="responsavel" id="where-input" placeholder="Where?" class="form-control">
+                        <input type="text" name="responsavel" id="where-input" placeholder="Where?"
+                            class="form-control">
                     </div>
                     <div class="mb-3">
                         <label for="who-input">Por quem será feito?</label>
@@ -56,20 +66,21 @@
                     </div>
                     <div class="mb-3">
                         <label for="how-much-input">Quanto custará?</label>
-                        <input type="text" name="responsavel" id="how-much-input" placeholder="How Much?" class="form-control">
+                        <input type="number" name="responsavel" id="how-much-input" placeholder="How Much?"
+                            class="form-control">
                     </div>
                     <div class="mb-3">
-                        <button type="button" id="criar-tarefa" class="btn btn-primary" >Adicionar Tarefa</button>
+                        <button type="button" id="criar-tarefa" class="btn btn-primary">Adicionar Tarefa</button>
                     </div>
                     <div class="mb-3"></div>
                 </form>
             </div>
-        </section>        
+        </section>
         <section id="tasks-section">
-            <div id="div-tarefas">               
+            <div id="div-tarefas">
                 <table id="tabela-tarefas">
                     <tr>
-                        <th>Oque</th>
+                        <th>O que</th>
                         <th>Como</th>
                         <th>Porque</th>
                         <th>Onde</th>
@@ -77,7 +88,47 @@
                         <th>Quando</th>
                         <th>Quanto</th>
                         <th>Status</th>
-                    </tr>                   
+                    </tr>
+                    <!-- <tr>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                        <td>teste1</td>
+                    </tr>
+                    <tr>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                        <td>teste2</td>
+                    </tr>
+                    <tr>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                        <td>teste3</td>
+                    </tr>
+                    <tr>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                        <td>teste4</td>
+                    </tr> -->
                 </table>
             </div>
         </section>
@@ -85,7 +136,8 @@
             <p>Todos os direitos reservados: Romildo Silva</p>
         </footer>
     </main>
-    
+
     <script src="./script2.js"></script>
 </body>
+
 </html>

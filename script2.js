@@ -13,20 +13,25 @@ const btnRemover = document.getElementById('remover-selecionado');
 const btnRemoveAll = document.getElementById('apaga-tudo');
 const btnRemoveCompleted = document.getElementById('remover-finalizados');
 
-const data = new Date();
+const formatDate = () => {
+  let quando = whenInput.value;
+  const dataFormatada = quando.split('-');
+  quando = `${dataFormatada[2]}-${dataFormatada[1]}-${dataFormatada[0]}`;
+  return (quando);
+};
 
 function adicionarTarefa() {
-  let table = document.getElementById("tabela-tarefas");
-  let row = table.insertRow(table.rows.length);
+  const table = document.getElementById('tabela-tarefas');
+  const row = table.insertRow(table.rows.length);
   row.className = 'data-rows';
-  let cell1 = row.insertCell(0);
-  let cell2 = row.insertCell(1);
-  let cell3 = row.insertCell(2);
-  let cell4 = row.insertCell(3);
-  let cell5 = row.insertCell(4);
-  let cell6 = row.insertCell(5);
-  let cell7 = row.insertCell(6);
-  let cell8 = row.insertCell(7);
+  const cell1 = row.insertCell(0);
+  const cell2 = row.insertCell(1);
+  const cell3 = row.insertCell(2);
+  const cell4 = row.insertCell(3);
+  const cell5 = row.insertCell(4);
+  const cell6 = row.insertCell(5);
+  const cell7 = row.insertCell(6);
+  const cell8 = row.insertCell(7);
   cell1.innerHTML = whatInput.value;
   cell1.className = 'cells';
   cell2.innerHTML = howInput.value;
@@ -37,7 +42,7 @@ function adicionarTarefa() {
   cell4.className = 'cells';
   cell5.innerHTML = whoInput.value;
   cell5.className = 'cells';
-  cell6.innerHTML = whenInput.value;
+  cell6.innerHTML = formatDate();
   cell6.className = 'cells';
   cell7.innerHTML = muchInput.value;
   cell7.className = 'cells';
@@ -58,35 +63,34 @@ btnAdicionar.addEventListener('click', () => {
 
 btnSalvar.addEventListener('click', () => {
   localStorage.clear();
-  let tableRows = document.querySelectorAll('.data-rows');
+  const tableRows = document.querySelectorAll('.data-rows');
   for (let index = 0; index < tableRows.length; index += 1) {
-    const filhos = tableRows[index].children
-    let rowCells = []
+    const filhos = tableRows[index].children;
+    const rowCells = [];
     for (let index2 = 0; index2 < filhos.length; index2 += 1) {
       rowCells.push(filhos[index2].innerHTML);
     }
-    rowCells.push(tableRows[index].classList)
-    localStorage.setItem(`${index +1} tableRow`, rowCells);
-    // console.log(tableRows)
+    rowCells.push(tableRows[index].classList);
+    localStorage.setItem(`${index + 1} tableRow`, rowCells);
   }
 });
 
 const recuperaLista = () => {
-  let arrayInfo = Object.entries(localStorage);
+  const arrayInfo = Object.entries(localStorage);
   arrayInfo.forEach((element) => {
     const rowData = element[1].split(',');
     // console.log (rowData);
-    let table = document.getElementById("tabela-tarefas");
-    let row = table.insertRow(table.rows.length);
+    const table = document.getElementById('tabela-tarefas');
+    const row = table.insertRow(table.rows.length);
     row.classList = rowData[rowData.length - 1];
-    let cell1 = row.insertCell(0);
-    let cell2 = row.insertCell(1);
-    let cell3 = row.insertCell(2);
-    let cell4 = row.insertCell(3);
-    let cell5 = row.insertCell(4);
-    let cell6 = row.insertCell(5);
-    let cell7 = row.insertCell(6);
-    let cell8 = row.insertCell(7);
+    const cell1 = row.insertCell(0);
+    const cell2 = row.insertCell(1);
+    const cell3 = row.insertCell(2);
+    const cell4 = row.insertCell(3);
+    const cell5 = row.insertCell(4);
+    const cell6 = row.insertCell(5);
+    const cell7 = row.insertCell(6);
+    const cell8 = row.insertCell(7);
     cell1.innerHTML = rowData[0];
     cell1.className = 'cells';
     cell2.innerHTML = rowData[1];
@@ -103,36 +107,33 @@ const recuperaLista = () => {
     cell7.className = 'cells';
     cell8.innerHTML = rowData[7];
     cell8.className = 'cells';
-  })
-  // console.log(arrayInfo);
-}
+  });
+};
 window.onload = () => {
   setTimeout(recuperaLista, 500);
-}
+};
 
 // Inserindo classe selecionada:
-tabelaTarefas.addEventListener('click', function (event) {
-  let allSelected = document.querySelectorAll('.selecionada');
-  let rowSelected = event.target.parentElement;
-  // console.log(allSelected);
+tabelaTarefas.addEventListener('click', (event) => {
+  const allSelected = document.querySelectorAll('.selecionada');
+  const rowSelected = event.target.parentElement;
   for (let index = 0; index < allSelected.length; index += 1) {
     if (allSelected[index] !== rowSelected) {
       allSelected[index].classList.remove('selecionada');
     }
   }
-  let listaClasses = rowSelected.classList;
+  const listaClasses = rowSelected.classList;
   if (listaClasses.contains('selecionada')) {
     rowSelected.classList.remove('selecionada');
   } else {
     rowSelected.classList.add('selecionada');
-    // console.log(rowSelected);
   }
-})
+});
 
 // Concluíndo tarefas com click duplo:
 tabelaTarefas.addEventListener('dblclick', (event) => {
-  let tarefaConcluida = event.target.parentElement;
-  let listaClasses = tarefaConcluida.classList;
+  const tarefaConcluida = event.target.parentElement;
+  const listaClasses = tarefaConcluida.classList;
   if (listaClasses.contains('completed')) {
     tarefaConcluida.classList.remove('completed');
     tarefaConcluida.lastChild.innerHTML = 'Pendente';
@@ -140,43 +141,62 @@ tabelaTarefas.addEventListener('dblclick', (event) => {
     tarefaConcluida.classList.add('completed');
     tarefaConcluida.lastChild.innerHTML = 'Concluída';
   }
-})
+});
 
 // Removendo tarefa selecionada
 btnRemover.addEventListener('click', () => {
-  let allSelected = document.getElementsByClassName('selecionada');
-  let tableBody = document.querySelectorAll("tbody");
+  const allSelected = document.getElementsByClassName('selecionada');
+  const tableBody = document.querySelectorAll('tbody');
   // console.log(tableBody[0].children.length)
   for (let index = 0; index < tableBody[0].children.length; index += 1) {
     if (allSelected[0] === tableBody[0].children[index]) {
       tableBody[0].removeChild(tableBody[0].children[index]);
     }
   }
-  // console.log(allSelected);
-  // console.log(tableBody[0].children);
-  // console.log(allSelected[0] === tableBody[0].children[3]);
-})
+});
 
 // Botão limpar lista:
 btnRemoveAll.addEventListener('click', () => {
-  let tableBody = document.querySelectorAll("tbody");
+  const tableBody = document.querySelectorAll('tbody');
   while (tableBody[0].children.length > 1) {
     tableBody[0].removeChild(tableBody[0].children[1]);
   }
-})
+});
 
 btnRemoveCompleted.addEventListener('click', () => {
-  let allCompleted = document.getElementsByClassName('completed');
-  let tableBody = document.querySelectorAll("tbody");
-  // console.log(tableBody[0])
-  // console.log(tableBody[0].children)
+  const tableBody = document.querySelectorAll('tbody');
   for (let cont = 0; cont < tableBody[0].children.length; cont += 1) {
     for (let index = 0; index < tableBody[0].children.length; index += 1) {
-      // console.log(tableBody[0].children[index]);
       if (tableBody[0].children[index].classList.contains('completed')) {
         tableBody[0].removeChild(tableBody[0].children[index]);
       }
     }
   }
-})
+});
 
+// Criando relógio digital
+const time = () => {
+  const date = new Date();
+  let hour = date.getHours();
+  let minute = date.getMinutes();
+  let second = date.getSeconds();
+  hour < 10 ? hour = `0${hour}` : hour = hour;
+  minute < 10 ? minute = `0${minute}` : minute = minute;
+  second < 10 ? second = `0${second}` : second = second;
+  document.getElementById('digital-clock').innerText = `${hour} : ${minute} : ${second}`;
+};
+
+const getDate = () => {
+  const date = new Date();
+  let day = date.getDate();
+  let month = date.getMonth();
+  const year = date.getFullYear();
+  day < 10 ? day = `0${day}` : day = day;
+  month < 12 ? month += 1 : month = month;
+  month < 10 ? month = `0${month}` : month = month;
+  document.getElementById('data-atual').innerText = `${day} / ${month} / ${year}`;
+};
+setInterval(() => {
+  time();
+  getDate();
+}, 1000);

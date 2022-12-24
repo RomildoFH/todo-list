@@ -10,33 +10,52 @@ body {
 }
 
 header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
     text-align: center;
     text-transform: uppercase;
-    margin-bottom: 15px;
+    margin-bottom: 15px;    
 }
 
 header h1 {
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: 80px;
+    text-shadow: 3px 3px 3px black;
+}
+
+#calendario {
+    background-color: #212529;
+    width: fit-content;
+    /* margin: 0px auto; */
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-weight: 700;
+    height: fit-content;
 }
 
 #section-controls {
     display: flex;
     justify-content: space-around;
     position:fixed;
-    top: 88%;
+    top: 85%;
     width: 100%;
+    margin-bottom: 50px;
 }
 
 #tasks-section {
     display: flex;
     justify-content: center;
+    margin-bottom: 100px;
 }
 
 #div-tarefas {
     display: flex;
     justify-content: center;
     min-height: 100px;
-    max-width: 80%;
+    max-width: 90%;
 }
 
 .tarefa {
@@ -53,7 +72,7 @@ header h1 {
 .completed td {
     /* text-decoration: line-through solid rgb(243, 3, 3); */
     color:rgb(26, 226, 26);
-    font-weight: 500;
+    font-weight: 700;
     text-shadow: 1px 1px 1px black;
 }
 
@@ -100,6 +119,7 @@ form {
 
 label {
     margin: 0px;
+    text-shadow: 1px 1px 1px black;
 }
 
 #criar-tarefa {
@@ -116,8 +136,11 @@ footer {
 }
 
 table {
+    display: flex;
+    flex-wrap: wrap;
     text-align: center;
     text-shadow: 1px 1px 1px black;
+    font-weight:700;
 }
 
 table th {
@@ -126,5 +149,30 @@ table th {
     text-transform: uppercase;
     font-weight: bolder;
     min-width: 100px;
-    /* max-width: 150px; */
+}
+
+.cells {
+    max-width: 200px;
+}
+
+@media screen and (max-width: 600px) {
+    * {
+        margin: 0px 3px;
+    }
+    header h1 {
+        font-size: 50px;
+    }
+    table {
+        margin: 0px auto;
+        font-size: 10px;
+    }    
+    table th {        
+        min-width: 35px;
+    }
+
+    .btn, .btn-dark {
+        font-size: 10px;
+        max-width:fit-content;
+        margin: 0px 2px;
+    }
 }
